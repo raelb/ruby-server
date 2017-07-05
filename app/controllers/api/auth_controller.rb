@@ -1,6 +1,6 @@
 class Api::AuthController < Api::ApiController
 
-  skip_before_action :authenticate_user, except: [:change_pw]
+  skip_before_action :authenticate_user, except: [:change_pw, :update]
 
   before_action {
     @user_manager = user_manager
@@ -26,6 +26,15 @@ class Api::AuthController < Api::ApiController
 
   def change_pw
     result = @user_manager.change_pw(current_user, params[:new_password], params)
+    if result[:error]
+      render :json => result, :status => 401
+    else
+      render :json => result
+    end
+  end
+
+  def update
+    result = @user_manager.update(current_user, params)
     if result[:error]
       render :json => result, :status => 401
     else

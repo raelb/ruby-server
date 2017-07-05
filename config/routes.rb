@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'auth/params' => "api/auth#auth_params"
   post "auth/sign_in" => "api/auth#sign_in"
   post "auth" => "api/auth#register"
+  post "auth/update" => "api/auth#update"
   post "auth/change_pw" => "api/auth#change_pw"
 
   post "items/sync" => "api/items#sync"
