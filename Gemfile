@@ -8,8 +8,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'dotenv-rails', '~> 2.1.1'
 
-# gem 'standard-file', require: 'standard_file'
-gem 'standard-file', :path => "~/Desktop/rails-engine", require: 'standard_file'
+gem 'standard-file', require: 'standard_file'
 
 # Used for 'respond_to' feature
 gem 'responders', '~> 2.0'
