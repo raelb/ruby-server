@@ -34,6 +34,7 @@ You can run your own Standard File server, and use it with any SF compatible cli
 
 	```
 	bundle install
+	bower install
 	rails db:create db:migrate
 	```
 
