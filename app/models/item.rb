@@ -7,4 +7,14 @@ class Item < ApplicationRecord
     result
   end
 
+  def decoded_content
+    if self.content == nil
+      return nil
+    end
+    string = self.content[3..self.content.length]
+    decoded = Base64.decode64(string)
+    obj = JSON.parse(decoded)
+    return obj
+  end
+
 end

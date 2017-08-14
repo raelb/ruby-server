@@ -43,7 +43,12 @@ class Api::AuthController < Api::ApiController
   end
 
   def auth_params
-    render :json => @user_manager.auth_params(params[:email])
+    auth_params = @user_manager.auth_params(params[:email])
+    if !auth_params
+      render :json => {:error => {:message => "Unable to locate account for email."}}, :status => 404
+    else
+      render :json => @user_manager.auth_params(params[:email])
+    end
   end
 
 end

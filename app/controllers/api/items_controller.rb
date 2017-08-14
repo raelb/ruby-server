@@ -27,8 +27,10 @@ class Api::ItemsController < Api::ApiController
 
     extensions = current_user.items.where(:content_type => "SF|Extension")
     extensions.each do |ext|
-      url = url_for_extension(ext)
-      post_to_extension(url, items)
+      content = ext.decoded_content
+      if content && content["subtype"] == nil
+        post_to_extension(content["url"], items)
+      end
     end
   end
 
@@ -42,10 +44,12 @@ class Api::ItemsController < Api::ApiController
   # This is called when a new extension is registered.
   def backup
     ext = current_user.items.find(params[:uuid])
-    url = url_for_extension(ext)
-    items = current_user.items.to_a
-    if items && items.length > 0
-      post_to_extension(url, items)
+    content = ext.decoded_content
+    if content && content["subtype"] == nil
+      items = current_user.items.to_a
+      if items && items.length > 0
+        post_to_extension(content["url"], items)
+      end
     end
   end
 
@@ -67,17 +71,6 @@ class Api::ItemsController < Api::ApiController
   end
 
   private
-
-  def url_for_extension(ext)
-    if ext.content == nil
-      return nil
-    end
-    string = ext.content[3..ext.content.length]
-    decoded = Base64.decode64(string)
-    obj = JSON.parse(decoded)
-    url = obj["url"]
-    return url
-  end
 
   def permitted_params
     [:content_type, :content, :auth_hash, :enc_item_key]

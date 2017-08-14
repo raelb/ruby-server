@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703185958) do
+ActiveRecord::Schema.define(version: 20170808194325) do
 
   create_table "items", primary_key: "uuid", id: :string, limit: 36, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",      limit: 16777215
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20170703185958) do
     t.string   "encrypted_password", default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "pw_auth"
     t.string   "pw_salt"
+    t.string   "version"
     t.index ["email"], name: "index_users_on_email", using: :btree
   end
 
