@@ -28,6 +28,12 @@ class Api::ApiController < ApplicationController
 
     claims = StandardFile::JwtHelper.decode(token) rescue nil
     user = User.find_by_uuid claims['user_uuid']
+
+    if user == nil
+      render_invalid_auth
+      return
+    end
+
     if claims['pw_hash']
       # newer versions of our jwt include the user's hashed encrypted pw,
       # to check if the user has changed their pw and thus forbid them from access if they have an old jwt

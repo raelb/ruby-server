@@ -1,6 +1,6 @@
 {
   "name": "ruby-server",
   "dependencies": {
-    "standard-file-dashboard": "0.1.9"
+    "standard-file-dashboard": "0.2.1"
   }
 }

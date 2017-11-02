@@ -15,7 +15,7 @@ class Api::ItemsController < Api::ApiController
       :cursor_token => params[:cursor_token],
       :limit => params[:limit]
     }
-    results = sync_manager.sync(params[:items], options)
+    results = sync_manager.sync(params[:items], options, request)
     post_to_extensions(params.to_unsafe_hash[:items])
     render :json => results
   end

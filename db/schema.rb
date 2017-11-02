@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808194325) do
+ActiveRecord::Schema.define(version: 20171102152234) do
 
   create_table "items", primary_key: "uuid", id: :string, limit: 36, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",      limit: 16777215
+    t.text     "content",         limit: 16777215
     t.string   "content_type"
-    t.text     "enc_item_key", limit: 65535
+    t.text     "enc_item_key",    limit: 65535
     t.string   "auth_hash"
     t.string   "user_uuid"
-    t.boolean  "deleted",                                     default: false
-    t.datetime "created_at",                    precision: 6,                 null: false
-    t.datetime "updated_at",                    precision: 6,                 null: false
+    t.boolean  "deleted",                                        default: false
+    t.datetime "created_at",                       precision: 6,                 null: false
+    t.datetime "updated_at",                       precision: 6,                 null: false
+    t.text     "last_user_agent", limit: 65535
     t.index ["updated_at"], name: "index_items_on_updated_at", using: :btree
     t.index ["user_uuid", "content_type"], name: "index_items_on_user_uuid_and_content_type", using: :btree
     t.index ["user_uuid"], name: "index_items_on_user_uuid", using: :btree
