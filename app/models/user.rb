@@ -20,4 +20,10 @@ class User < ApplicationRecord
     return params
   end
 
+  def export_archive
+    data = {:items => self.items.where(:deleted => false), :auth_params => self.auth_params}
+    # This will write restore.txt in your application's root directory.
+    File.open("tmp/#{self.email}-restore.txt", 'w') { |file| file.write(JSON.pretty_generate(data.as_json({}))) }
+  end
+
 end

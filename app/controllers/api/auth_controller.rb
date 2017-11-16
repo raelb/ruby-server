@@ -16,6 +16,10 @@ class Api::AuthController < Api::ApiController
   end
 
   def register
+    if !params[:version]
+      params[:version] = "002"
+    end
+
     result = @user_manager.register(params[:email], params[:password], params)
     if result[:error]
       render :json => result, :status => 401

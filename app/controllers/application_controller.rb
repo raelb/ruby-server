@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def set_app_domain
-    @appDomain = request.domain
-    @appDomain << ':' + request.port.to_s unless request.port.blank?
-  end
   def set_csrf_cookie
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
