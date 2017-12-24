@@ -10,6 +10,8 @@ gem 'dotenv-rails', '~> 2.1.1'
 
 gem 'standard-file', require: 'standard_file'
 
+gem 'rotp'
+
 # Used for 'respond_to' feature
 gem 'responders', '~> 2.0'
 
