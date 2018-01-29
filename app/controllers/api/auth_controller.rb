@@ -28,7 +28,7 @@ class Api::AuthController < Api::ApiController
           render :json => {
               :error => {
                 :tag => "mfa-invalid",
-                :message => "The #{mfa_content['name']} code you entered is incorrect. Please try again.",
+                :message => "The two-factor authentication code you entered is incorrect. Please try again.",
                 :payload => {:mfa_key => mfa_param_key}
               }
             }, :status => 401
@@ -39,7 +39,7 @@ class Api::AuthController < Api::ApiController
         render :json => {
             :error => {
               :tag => "mfa-required",
-              :message => "Please enter your multi-factor authentication code for #{mfa_content['name']}.",
+              :message => "Please enter your two-factor authentication code.",
               :payload => {:mfa_key => mfa_param_key}
             }
           }, :status => 401
