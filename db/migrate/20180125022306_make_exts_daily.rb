@@ -10,7 +10,7 @@ class MakeExtsDaily < ActiveRecord::Migration[5.0]
       obj = JSON.parse(decoded)
       url = obj["url"]
 
-      if url.include?("dropbox") || url.include?("gdrive") || url.include?("onedrive")
+      if url.include?("dropbox") || url.include?("gdrive") || url.include?("onedrive") || url.include?("backup.email_archive")
         obj["frequency"] = "daily"
         new_string = "000" + Base64.encode64(obj.to_json)
         ext.content = new_string

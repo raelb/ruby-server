@@ -8,6 +8,7 @@ class Api::AuthController < Api::ApiController
 
   def mfa_for_email(email)
     user = User.find_by_email(email)
+    return if user == nil
     mfa = user.items.where("content_type" => "SF|MFA", "deleted" => false).first
     return mfa
   end

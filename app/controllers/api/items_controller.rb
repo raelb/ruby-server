@@ -31,7 +31,7 @@ class Api::ItemsController < Api::ApiController
       if content
         frequency = content["frequency"]
         subtype = content["subtype"]
-        if subtype == nil && (frequency == nil || frequency != "daily")
+        if frequency == "realtime" || (subtype == nil && (frequency == nil || frequency != "daily"))
           post_to_extension(content["url"], items)
         end
       end
