@@ -28,8 +28,12 @@ class Api::ItemsController < Api::ApiController
     extensions = current_user.items.where(:content_type => "SF|Extension")
     extensions.each do |ext|
       content = ext.decoded_content
-      if content && content["subtype"] == nil
-        post_to_extension(content["url"], items)
+      if content
+        frequency = content["frequency"]
+        subtype = content["subtype"]
+        if subtype == nil && (frequency == nil || frequency != "daily")
+          post_to_extension(content["url"], items)
+        end
       end
     end
   end

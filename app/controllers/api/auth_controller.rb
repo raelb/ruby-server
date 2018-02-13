@@ -26,7 +26,7 @@ class Api::AuthController < Api::ApiController
           # Invalid MFA, abort login
           render :json => {
               :error => {
-                :tag => "invalid-mfa",
+                :tag => "mfa-invalid",
                 :message => "The #{mfa_content['name']} code you entered is incorrect. Please try again.",
                 :payload => {:mfa_key => mfa_param_key}
               }
