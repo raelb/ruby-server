@@ -2,7 +2,7 @@ class DailyBackupJob < ApplicationJob
   queue_as :default
 
   def perform_rate_limited_send(queue, proc)
-    jobs_per_second = 35
+    jobs_per_second = 15
     current_delay = 0.0
     current_job_number = 0
     queue.each do |queue_item|

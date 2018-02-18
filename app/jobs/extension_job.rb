@@ -15,7 +15,8 @@ class ExtensionJob < ApplicationJob
     response = http.request(req)
 
     if response.code[0] != '2'
-      retry_job wait: 5.seconds if retries_count < 2
+      puts "Error performing ExtensionJob"
+      retry_job wait: 5.seconds if retries_count < 1
     end
   end
 end
