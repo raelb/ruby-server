@@ -11,7 +11,7 @@ class DailyBackupJob < ApplicationJob
         current_delay += 1.2
       end
       current_job_number += 1
-      proc.call(queue_item[:url], queue_item[:user], current_delay)
+      proc.call(queue_item, current_delay)
     end
   end
 
@@ -23,13 +23,20 @@ class DailyBackupJob < ApplicationJob
       if content && content["frequency"] == "daily"
         queue.push({
           url: content["url"],
-          user: item.user
+          user: item.user,
+          user_id: item.user && item.user.uuid
         })
       end
     end
 
-    proc = Proc.new do |url, user, delay|
-      ExtensionJob.set(wait: delay.seconds).perform_later(url, user.items.to_a, user.auth_params)
+    proc = Proc.new do |queue_item, delay|
+      user = queue_item[:user]
+      url = queue_item[:url]
+      if user != nil
+        ExtensionJob.set(wait: delay.seconds).perform_later(url, user.items.to_a, user.auth_params)
+      else
+        puts "User is nil, #{queue_item[:user_id]}"
+      end
     end
 
     perform_rate_limited_send(queue, proc)
