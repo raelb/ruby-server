@@ -79,6 +79,18 @@ class Api::AuthController < Api::ApiController
   end
 
   def change_pw
+    if !params[:current_password]
+      render :json => {:error => {:message => "Your current password is required to change your password. Please update your application if you do not see this option."}}, :status => 401
+      return
+    end
+
+    # Verify current password first
+    sign_in_result = @user_manager.sign_in(current_user.email, params[:current_password])
+    if sign_in_result[:error]
+      render :json => {:error => {:message => "The current password you entered is incorrect. Please try again."}}, :status => 401
+      return
+    end
+    
     result = @user_manager.change_pw(current_user, params[:new_password], params)
     if result[:error]
       render :json => result, :status => 401

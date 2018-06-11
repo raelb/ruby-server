@@ -9,7 +9,15 @@ class User < ApplicationRecord
 
 
   def auth_params
-    params = {:pw_salt => self.pw_salt, :pw_cost => self.pw_cost}
+    params = {:pw_cost => self.pw_cost, :version => self.version, :identifier => self.email}
+
+    if self.pw_nonce
+      params[:pw_nonce] = self.pw_nonce
+    end
+
+    if self.pw_salt
+      params[:pw_salt] = self.pw_salt
+    end
 
     if self.pw_func
       params[:pw_func] = self.pw_func
