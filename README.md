@@ -93,4 +93,4 @@ Contributions are encouraged and welcome. Currently outstanding items:
 
 ## License
 
-Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html
+Licensed under the GNU AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
