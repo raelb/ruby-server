@@ -11,7 +11,12 @@ Rails.application.configure do
   config.cache_classes = false
   config.reload_classes_only_on_change = true
 
-  config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 1 * 1024 * 1024)
+  MAX_LOG_MEGABYTES = 1
+  config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, MAX_LOG_MEGABYTES * 1024 * 1024)
+
+  require 'custom_log_formatter'
+  config.log_formatter = CustomLogFormatter.new
+  config.logger.formatter = config.log_formatter
 
   # Do not eager load code on boot.
   config.eager_load = false
