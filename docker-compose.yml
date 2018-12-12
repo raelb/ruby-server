@@ -11,7 +11,7 @@ services:
     ports:
       - "3000:3000"
   db:
-    image: mysql:5.7.17
+    image: mysql:latest
     env_file: ./docker/environments/.env.db.development
     volumes:
       - db_data:/var/lib/mysql
