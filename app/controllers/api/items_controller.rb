@@ -18,6 +18,11 @@ class Api::ItemsController < Api::ApiController
     }
     results = sync_manager.sync(params[:items], options, request)
     post_to_extensions(params.to_unsafe_hash[:items])
+
+    if params[:compute_integrity]
+      results[:integrity_hash] = current_user.compute_data_signature
+    end
+
     render :json => results
   end
 
