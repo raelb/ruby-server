@@ -37,7 +37,7 @@ class User < ApplicationRecord
   def compute_data_signature
     begin
       # in my testing, .select performs better than .pluck
-      dates = self.items.where(:deleted => false).order(:updated_at).select(:updated_at).map { |item| item.updated_at.to_datetime.strftime('%Q')  }
+      dates = self.items.where(:deleted => false).where.not(:content_type => nil).select(:updated_at).map { |item| item.updated_at.to_datetime.strftime('%Q')  }
       dates = dates.sort().reverse
       string = dates.join(",")
       hash = Digest::SHA256.hexdigest(string)
