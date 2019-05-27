@@ -48,13 +48,13 @@ You can run your own Standard File server, and use it with any SF compatible cli
 
 You can find instructions on deploying an SN server from scratch here:
 
-[Deploying a Standard File server with Amazon EC2 and Nginx](https://github.com/standardfile/ruby-server/wiki/Deploying-a-private-Standard-File-server-with-Amazon-EC2-and-Nginx)
+[Deploying a Standard File server with Amazon EC2 and Nginx](https://docs.standardnotes.org/self-hosting/self-hosting-with-ec2-and-nginx)
 
 #### Using Docker
 
 To deploy to a live server using Docker and Docker-Compose, see:
 
-[Deploying a private Standard File server using Docker](https://github.com/standardfile/ruby-server/wiki/Deploying-a-private-Standard-File-server-using-Docker)
+[Deploying a private Standard File server using Docker](https://docs.standardnotes.org/self-hosting/self-hosting-with-docker)
 
 ### Environment variables
 
@@ -85,11 +85,6 @@ Database username.
 **DB_PASSWORD**
 
 Database password.
-
-## Contributing
-Contributions are encouraged and welcome. Currently outstanding items:
-
-- Test suite
 
 ## License
 

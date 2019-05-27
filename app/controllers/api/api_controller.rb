@@ -9,7 +9,7 @@ class Api::ApiController < ApplicationController
   before_action {
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
-    self.user_manager = StandardFile::UserManager.new(User)
+    self.user_manager = StandardFile::V20190520::UserManager.new(User)
   }
 
   protected

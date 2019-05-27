@@ -4,7 +4,12 @@ class Api::ItemsController < Api::ApiController
 
   def sync_manager
     if !@sync_manager
-      @sync_manager = StandardFile::SyncManager.new(current_user)
+      version = params[:api]
+      if version == "20190520"
+        @sync_manager = StandardFile::V20190520::SyncManager.new(current_user)
+      else
+        @sync_manager = StandardFile::V20161215::SyncManager.new(current_user)
+      end
     end
     @sync_manager
   end
