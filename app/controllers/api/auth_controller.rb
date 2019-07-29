@@ -65,6 +65,7 @@ class Api::AuthController < Api::ApiController
   end
 
   MAX_LOCKOUT = 3600 # 1 Hour
+  MAX_ATTEMPTS = 6 # Per hour
   def handle_failed_auth_attempt
     # current_user is only available to jwt requests (change_password)
     user = current_user || User.find_by_email(params[:email])
@@ -72,12 +73,11 @@ class Api::AuthController < Api::ApiController
 
     user.num_failed_attempts = 0 if !user.num_failed_attempts
     user.num_failed_attempts += 1
-    num_seconds_to_lockout = 2 ** user.num_failed_attempts
-    if num_seconds_to_lockout > MAX_LOCKOUT
-      num_seconds_to_lockout = MAX_LOCKOUT
+    if user.num_failed_attempts >= MAX_ATTEMPTS
+      user.num_failed_attempts = 0
+      user.locked_until = DateTime.now + MAX_LOCKOUT.seconds
     end
 
-    user.locked_until = DateTime.now + num_seconds_to_lockout.seconds
     user.save
   end
 

@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
 
   layout :false
 
-  def dashboard
-
-  end
-
   protected
 
   def set_csrf_cookie

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get "dashboard" => "application#dashboard"
-
   # forward non-namespaced routes to api namespace
   get 'auth/params' => "api/auth#auth_params"
   post "auth/sign_in" => "api/auth#sign_in"
