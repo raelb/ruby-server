@@ -11,13 +11,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get autoremove -y && \
     apt-get clean
-RUN npm install -g bower
 
 WORKDIR $PROJECT_DIR
 
-COPY Gemfile Gemfile.lock bower.json $PROJECT_DIR
+COPY Gemfile Gemfile.lock $PROJECT_DIR
 RUN bundle install
-RUN bower install --allow-root
 
 COPY . $PROJECT_DIR
 RUN bundle exec rake assets:precompile

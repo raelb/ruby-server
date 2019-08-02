@@ -41,15 +41,6 @@ set :rvm_ruby_version, '2.3.0'
 
 namespace :deploy do
 
-  task :bower_install do
-    on roles(:app) do
-      within release_path do
-        # string commands dont work, have to use special *%w syntax
-        execute *%w[ bower install ]
-      end
-    end
-  end
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 5 do
       # Here we can do anything such as:
@@ -59,8 +50,6 @@ namespace :deploy do
     end
   end
 end
-
-before 'deploy:compile_assets', 'bower_install'
 
 set :ssh_options, {
   keys: %W( #{CAP_CONFIG['default']['key_path']} ),
