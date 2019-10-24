@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.1'
+gem 'rails', '5.1.7'
 
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 
 gem 'rack-cors', :require => 'rack/cors'
 
-gem 'dotenv-rails', '~> 2.1.1'
+gem 'dotenv-rails'
 
-gem 'standard-file', require: 'standard_file'
+gem 'secure_headers'
+
+gem 'standard-file', '0.3.4', require: 'standard_file'
 
 gem 'rotp'
 
@@ -25,9 +27,9 @@ group :development, :test do
 
   gem 'puma'
 
-  gem 'rspec-rails'
+    gem 'listen'
 
-  # gem 'standard-file', :path => "~/Desktop/standard_file_gem", require: 'standard_file'
+  gem 'rspec-rails'
 
   # Deployment tools
   gem 'capistrano'
@@ -36,5 +38,4 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
-  gem 'capistrano-git-submodule-strategy', '~> 0.1.22'
 end
