@@ -10,7 +10,7 @@ gem 'dotenv-rails'
 
 gem 'secure_headers'
 
-gem 'standard-file', '0.3.4', require: 'standard_file'
+gem 'standard-file', '0.3.5', require: 'standard_file'
 
 gem 'rotp'
 
